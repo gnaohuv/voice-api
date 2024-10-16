@@ -13,10 +13,9 @@ random.seed(123)
 
 # Load the Deep Speaker model.
 model = DeepSpeakerModel()
-model.m.load_weights("H:/ResCNN_triplet_training_checkpoint_265.h5", by_name=True)
+model.m.load_weights("ResCNN_triplet_training_checkpoint_265.h5", by_name=True)
 
 app = FastAPI()
-
 
 def extract_embedding(audio_path):
     np.random.seed(123)
@@ -25,7 +24,6 @@ def extract_embedding(audio_path):
     mfcc = sample_from_mfcc(read_mfcc(audio_path, SAMPLE_RATE), NUM_FRAMES)
     embedding = model.m.predict(np.expand_dims(mfcc, axis=0))
     return embedding
-
 
 @app.post("/compare/")
 async def compare_audio(file1: UploadFile = File(...), file2: UploadFile = File(...)):
@@ -42,9 +40,3 @@ async def compare_audio(file1: UploadFile = File(...), file2: UploadFile = File(
     similarity = batch_cosine_similarity(embedding1, embedding2)
 
     return {"similarity": float(similarity)}
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
