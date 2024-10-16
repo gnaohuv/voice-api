@@ -3,3 +3,4 @@ uvicorn
 tensorflow
 git+https://github.com/gnaohuv/deep-speaker.git
 numpy
+python-multipart
