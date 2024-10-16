@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+tensorflow
+git+https://github.com/philipperemy/deep-speaker.git
+numpy
