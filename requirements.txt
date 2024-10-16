@@ -1,5 +1,5 @@
 fastapi
 uvicorn
-tensorflow
+tensorflow==2.3.0
 git+https://github.com/philipperemy/deep-speaker.git
 numpy
